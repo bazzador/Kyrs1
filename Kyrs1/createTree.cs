@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Kyrs1
@@ -15,12 +16,11 @@ namespace Kyrs1
         public class Tree
         {
             public string Name { get; set; }
-            public int AmountOfBranches { get; set; }
-
-            public Tree(string name, int amountOfBranches)
+            public List<string> Branches { get; private set; } 
+            public Tree(string name, List<string> branches)
             {
                 Name = name;
-                AmountOfBranches = amountOfBranches;
+                Branches = branches;   
             }
         }
 
@@ -36,34 +36,21 @@ namespace Kyrs1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Tree tree = new Tree(nameText.Text, int.Parse(amount.Text));
+            List<string> branches = new List<string>();
+            foreach (ListViewItem item in listView1.Items)
+            {
+                branches.Add(item.Text);
+            }
+            Tree tree = new Tree(nameTree.Text, branches);
             TreeCreated?.Invoke(this, new TreeEventArgs(tree));
             this.Hide();
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void confirmBranchButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(nameText.Text) && !string.IsNullOrEmpty(amount.Text))
+            if (nameBranch.Text != "")
             {
-                // Створюємо нову гілку з введеними даними
-                Tree tree = new Tree(nameText.Text, int.Parse(amount.Text));
-
-                // Додаємо назву гілки у listView1
-                for (int i = 0; i < tree.AmountOfBranches; i++)
-                {
-                    listView1.Items.Add($"Вітка {i + 1}");
-                }
-            } 
-            else
-            {
-                // Виводимо повідомлення, якщо дані не введені
-                MessageBox.Show("Будь ласка, введіть назву та кількість гілок.");
+                listView1.Items.Add(nameBranch.Text);
             }
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
