@@ -51,6 +51,7 @@ namespace Kyrs1
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.addPhotoButton = new System.Windows.Forms.Button();
             this.saveChangesButton = new System.Windows.Forms.Button();
+            this.template_2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -157,7 +158,7 @@ namespace Kyrs1
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(284, -1);
+            this.panel1.Location = new System.Drawing.Point(280, 616);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(950, 650);
             this.panel1.TabIndex = 8;
@@ -269,12 +270,20 @@ namespace Kyrs1
             this.saveChangesButton.UseVisualStyleBackColor = true;
             this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
             // 
+            // template_2
+            // 
+            this.template_2.Location = new System.Drawing.Point(284, 0);
+            this.template_2.Name = "template_2";
+            this.template_2.Size = new System.Drawing.Size(950, 650);
+            this.template_2.TabIndex = 11;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.Controls.Add(this.template_2);
             this.Controls.Add(this.saveChangesButton);
             this.Controls.Add(this.addPhotoButton);
             this.Controls.Add(this.panel1);
@@ -321,6 +330,7 @@ namespace Kyrs1
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.RichTextBox richTextBox4;
         private Button saveChangesButton;
+        private Panel template_2;
     }
 }
 
