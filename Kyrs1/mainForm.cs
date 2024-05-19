@@ -85,19 +85,5 @@ namespace Kyrs1
             TreeNode selectedNode = e.Node;
             MessageBox.Show("Вибрано гілку: " + selectedNode.Text);
         }
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    if (treeView1.SelectedNode != null)
-        //    {
-        //        TreeNode selectedNode = treeView1.SelectedNode;
-        //        string nodeName = $"Вітка {selectedNode.Nodes.Count + 1}";
-        //        selectedNode.Nodes.Add(new TreeNode(nodeName));
-        //        selectedNode.Expand();
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Виберіть вузол, до якого буде додана вітка.");
-        //    }
-        //}
     }
 }

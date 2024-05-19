@@ -7,7 +7,12 @@ namespace Kyrs1
     public partial class createTree : Form
     {
         public event EventHandler<TreeEventArgs> TreeCreated;
-
+        public class abv
+        {
+            public abv()
+            {
+            }
+        }
         public createTree()
         {
             InitializeComponent();
