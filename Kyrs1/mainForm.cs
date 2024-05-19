@@ -85,5 +85,29 @@ namespace Kyrs1
             TreeNode selectedNode = e.Node;
             MessageBox.Show("Вибрано гілку: " + selectedNode.Text);
         }
+
+        private void addPhotoButton_Click(object sender, EventArgs e)
+        {
+            LoadImage(pictureBox1);
+        }
+        private void LoadImage(PictureBox pictureBox)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "Image Files|*.bmp;*.jpg;*.jpeg;*.png;*.gif";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Отримання шляху до вибраного файлу
+                    string filePath = openFileDialog.FileName;
+
+                    // Завантаження зображення у PictureBox
+                    pictureBox.Image = Image.FromFile(filePath);
+                }
+            }
+        }
     }
 }

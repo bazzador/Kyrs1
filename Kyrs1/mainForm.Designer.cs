@@ -44,6 +44,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.addPhotoButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -194,7 +196,8 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.pictureBox1.Location = new System.Drawing.Point(1, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(420, 274);
+            this.pictureBox1.Size = new System.Drawing.Size(420, 275);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -218,12 +221,27 @@
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // addPhotoButton
+            // 
+            this.addPhotoButton.Location = new System.Drawing.Point(1261, 256);
+            this.addPhotoButton.Name = "addPhotoButton";
+            this.addPhotoButton.Size = new System.Drawing.Size(98, 23);
+            this.addPhotoButton.TabIndex = 9;
+            this.addPhotoButton.Text = "Додати фото";
+            this.addPhotoButton.UseVisualStyleBackColor = true;
+            this.addPhotoButton.Click += new System.EventHandler(this.addPhotoButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.Controls.Add(this.addPhotoButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.underlineButton);
             this.Controls.Add(this.fontSizeComboBox);
@@ -262,6 +280,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button addPhotoButton;
     }
 }
 
