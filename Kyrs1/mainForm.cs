@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using static Kyrs1.createTree;
 
 namespace Kyrs1
 {
@@ -30,22 +32,23 @@ namespace Kyrs1
 
         private void boldButton_Click(object sender, EventArgs e)
         {
-            if (richTextBox1.SelectionFont != null)
-            {
                 Font currentFont = richTextBox1.SelectionFont;
                 FontStyle newFontStyle = currentFont.Style ^ FontStyle.Bold;
                 richTextBox1.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-            }
+                richTextBox2.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                richTextBox3.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                richTextBox4.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+
         }
 
         private void italicButton_Click(object sender, EventArgs e)
         {
-            if (richTextBox1.SelectionFont != null)
-            {
                 Font currentFont = richTextBox1.SelectionFont;
                 FontStyle newFontStyle = currentFont.Style ^ FontStyle.Italic;
                 richTextBox1.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
-            }
+                richTextBox2.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                richTextBox3.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
+                richTextBox4.SelectionFont = new Font(currentFont.FontFamily, currentFont.Size, newFontStyle);
         }
 
         private void fontSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -61,10 +64,11 @@ namespace Kyrs1
         }
         private void ChangeFontSize(float newSize)
         {
-            if (richTextBox1.SelectionFont != null)
-            {
                 richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, newSize, richTextBox1.SelectionFont.Style);
-            }
+                richTextBox2.SelectionFont = new Font(richTextBox2.SelectionFont.FontFamily, newSize, richTextBox2.SelectionFont.Style);
+                richTextBox3.SelectionFont = new Font(richTextBox3.SelectionFont.FontFamily, newSize, richTextBox3.SelectionFont.Style);
+                richTextBox4.SelectionFont = new Font(richTextBox4.SelectionFont.FontFamily, newSize, richTextBox4.SelectionFont.Style);
+
         }
 
         private void underlineButton_Click(object sender, EventArgs e)
@@ -107,6 +111,40 @@ namespace Kyrs1
                     // Завантаження зображення у PictureBox
                     pictureBox.Image = Image.FromFile(filePath);
                 }
+            }
+        }
+
+        private void saveChangesButton_Click(object sender, EventArgs e)
+        {
+            // Створення екземпляра template_1 з форматованим текстом у форматі RTF
+            template_1 template1 = new template_1(richTextBox4.Text, pictureBox1.Image, richTextBox1.Rtf, richTextBox2.Rtf, richTextBox3.Rtf);
+
+            // Збереження даних у текстовий файл
+            try
+            {
+                string filePath = template1.AdressFile;
+
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    writer.WriteLine("Name: " + template1.Name);
+                    writer.WriteLine("Info (RTF): " + template1.Info);
+                    writer.WriteLine("ExtraInfo (RTF): " + template1.ExtraInfo);
+                    writer.WriteLine("Address: " + template1.Adress);
+
+                    // Збереження зображення в окремий файл
+                    if (template1.Image != null)
+                    {
+                        string imagePath = Path.Combine(Path.GetDirectoryName(filePath), "image.png");
+                        template1.Image.Save(imagePath);
+                        writer.WriteLine("ImagePath: " + imagePath);
+                    }
+                }
+
+                MessageBox.Show("Дані успішно збережено!", "Збереження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сталася помилка при збереженні даних: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

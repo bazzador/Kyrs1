@@ -1,4 +1,6 @@
-﻿namespace Kyrs1
+﻿using System.Windows.Forms;
+
+namespace Kyrs1
 {
     partial class mainForm
     {
@@ -37,20 +39,24 @@
             this.fontSizeComboBox = new System.Windows.Forms.ComboBox();
             this.underlineButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.addPhotoButton = new System.Windows.Forms.Button();
+            this.saveChangesButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,6 +152,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
@@ -155,31 +162,22 @@
             this.panel1.Size = new System.Drawing.Size(950, 650);
             this.panel1.TabIndex = 8;
             // 
-            // panel2
+            // panel6
             // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Location = new System.Drawing.Point(5, 5);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(421, 275);
-            this.panel2.TabIndex = 4;
+            this.panel6.Controls.Add(this.richTextBox4);
+            this.panel6.Location = new System.Drawing.Point(0, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(950, 25);
+            this.panel6.TabIndex = 8;
             // 
-            // panel3
+            // richTextBox4
             // 
-            this.panel3.BackColor = System.Drawing.Color.DimGray;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.richTextBox1);
-            this.panel3.Location = new System.Drawing.Point(5, 285);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(939, 320);
-            this.panel3.TabIndex = 5;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.richTextBox2);
-            this.panel4.Location = new System.Drawing.Point(432, 5);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(512, 275);
-            this.panel4.TabIndex = 6;
+            this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBox4.Location = new System.Drawing.Point(0, -3);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.Size = new System.Drawing.Size(950, 28);
+            this.richTextBox4.TabIndex = 0;
+            this.richTextBox4.Text = "";
             // 
             // panel5
             // 
@@ -191,27 +189,6 @@
             this.panel5.Size = new System.Drawing.Size(937, 43);
             this.panel5.TabIndex = 7;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(420, 275);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(512, 275);
-            this.richTextBox2.TabIndex = 9;
-            this.richTextBox2.Text = "";
-            // 
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.SystemColors.ScrollBar;
@@ -220,6 +197,53 @@
             this.richTextBox3.Size = new System.Drawing.Size(937, 44);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.richTextBox2);
+            this.panel4.Location = new System.Drawing.Point(432, 30);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(512, 250);
+            this.panel4.TabIndex = 6;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(510, 250);
+            this.richTextBox2.TabIndex = 9;
+            this.richTextBox2.Text = "";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.DimGray;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.richTextBox1);
+            this.panel3.Location = new System.Drawing.Point(5, 285);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(939, 320);
+            this.panel3.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Location = new System.Drawing.Point(6, 30);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(415, 250);
+            this.panel2.TabIndex = 4;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(415, 250);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // openFileDialog1
             // 
@@ -235,12 +259,23 @@
             this.addPhotoButton.UseVisualStyleBackColor = true;
             this.addPhotoButton.Click += new System.EventHandler(this.addPhotoButton_Click);
             // 
+            // saveChangesButton
+            // 
+            this.saveChangesButton.Location = new System.Drawing.Point(1261, 302);
+            this.saveChangesButton.Name = "saveChangesButton";
+            this.saveChangesButton.Size = new System.Drawing.Size(98, 23);
+            this.saveChangesButton.TabIndex = 10;
+            this.saveChangesButton.Text = "Зберегти дані";
+            this.saveChangesButton.UseVisualStyleBackColor = true;
+            this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.Controls.Add(this.saveChangesButton);
             this.Controls.Add(this.addPhotoButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.underlineButton);
@@ -253,10 +288,11 @@
             this.Name = "mainForm";
             this.Text = "Довідник";
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -282,6 +318,9 @@
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button addPhotoButton;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.RichTextBox richTextBox4;
+        private Button saveChangesButton;
     }
 }
 

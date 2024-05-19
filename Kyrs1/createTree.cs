@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Kyrs1
@@ -7,12 +8,24 @@ namespace Kyrs1
     public partial class createTree : Form
     {
         public event EventHandler<TreeEventArgs> TreeCreated;
-        public class abv
+        public class template_1
         {
-            public abv()
+            public string Name {  get; set; }
+            public Image Image { get; set; }
+            public string Info { get; set; }
+            public string ExtraInfo { get; set; }
+            public string Adress {  get; set; }
+            public string AdressFile = @"D:\saves";
+            public template_1(string name, Image image, string info, string extraInfo, string adress)
             {
+                Name = name;
+                Image = image;
+                Info = info;
+                ExtraInfo = extraInfo;
+                Adress = adress;
             }
         }
+        public
         public createTree()
         {
             InitializeComponent();
