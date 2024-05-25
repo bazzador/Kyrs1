@@ -35,6 +35,8 @@
             this.nameBranch = new System.Windows.Forms.TextBox();
             this.confirmBranchButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -81,11 +83,11 @@
             // 
             // confirmBranchButton
             // 
-            this.confirmBranchButton.Location = new System.Drawing.Point(187, 64);
+            this.confirmBranchButton.Location = new System.Drawing.Point(12, 67);
             this.confirmBranchButton.Name = "confirmBranchButton";
-            this.confirmBranchButton.Size = new System.Drawing.Size(90, 38);
+            this.confirmBranchButton.Size = new System.Drawing.Size(105, 38);
             this.confirmBranchButton.TabIndex = 8;
-            this.confirmBranchButton.Text = "Підтвердити назву";
+            this.confirmBranchButton.Text = "Підтвердити назву та шаблон\r\n\r\n";
             this.confirmBranchButton.UseVisualStyleBackColor = true;
             this.confirmBranchButton.Click += new System.EventHandler(this.confirmBranchButton_Click);
             // 
@@ -98,11 +100,34 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Назва підпункту";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "template_1",
+            "template_2",
+            "template_3"});
+            this.comboBox1.Location = new System.Drawing.Point(241, 77);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(189, 85);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Шаблон";
+            // 
             // createTree
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 300);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.confirmBranchButton);
             this.Controls.Add(this.nameBranch);
@@ -126,5 +151,7 @@
         private System.Windows.Forms.TextBox nameBranch;
         private System.Windows.Forms.Button confirmBranchButton;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label3;
     }
 }

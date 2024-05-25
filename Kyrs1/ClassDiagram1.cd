@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kyrs1.createTree">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Kyrs1.createTree.template" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Kyrs1.createTree.template_1" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Kyrs1.createTree.template_2" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Kyrs1.createTree.template_3" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Kyrs1.createTree.Tree" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Kyrs1.createTree.TreeEventArgs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>createTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABBQAACACBACEgAIAIAAAEAAAIAAAAA=</HashCode>
+      <FileName>createTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
