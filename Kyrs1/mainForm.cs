@@ -97,22 +97,51 @@ namespace Kyrs1
             template_1.Visible = false;
             template_2.Visible = false;
             template_3.Visible = false;
+            ClearForm();
             switch (templates[selectedNode.Index].GetType().Name)
             {
                 case "template_1":
                     template_1.Visible = true;
+                    template_1.Location = new Point(283, 15);
+                    addPhotoButton.Visible = true;
                     break;
                 case "template_2":
-                    template_2.Visible= true;
+                    template_2.Visible = true;
+                    template_2.Location = new Point(283, 15);
+                    addPhoto2Button.Visible = true;
+                    addPhoto3Button.Visible = true;
                     break;
                 case "template_3":
                     template_3.Visible= true;
+                    template_3.Location = new Point(283, 15);
                     break;
             }
+        }
+        private void ClearForm()
+        {
+            richTextBox1.Text = "";
+            richTextBox2.Text = "";
+            richTextBox3.Text = "";
+            richTextBox4.Text = "";
+            richTextBox5.Text = "";
+            richTextBox6.Text = "";
+            richTextBox7.Text = "";
+            richTextBox8.Text = "";
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
         }
         private void addPhotoButton_Click(object sender, EventArgs e)
         {
             LoadImage(pictureBox1);
+        }
+        private void addPhoto2Button_Click(object sender, EventArgs e)
+        {
+            LoadImage(pictureBox2);
+        }
+        private void addPhoto3Button_Click(object sender, EventArgs e)
+        {
+            LoadImage(pictureBox3);
         }
         private void LoadImage(PictureBox pictureBox)
         {
@@ -165,6 +194,30 @@ namespace Kyrs1
             catch (Exception ex)
             {
                 MessageBox.Show("Сталася помилка при збереженні даних: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void editTextButton_Click(object sender, EventArgs e)
+        {
+            if(editTextButton.Text == "Редагувати")
+            {
+                template_1.Enabled = true;
+                template_2.Enabled = true;
+                template_3.Enabled = true;
+                addPhotoButton.Enabled = true;
+                addPhoto2Button.Enabled = true;
+                addPhoto3Button.Enabled = true;
+                editTextButton.Text = "Зупинити редагування";
+            }
+            else
+            {
+                template_1.Enabled = false;
+                template_2.Enabled = false;
+                template_3.Enabled = false;
+                addPhotoButton.Enabled = false;
+                addPhoto2Button.Enabled = false;
+                addPhoto3Button.Enabled= false;
+                editTextButton.Text = "Редагувати";
             }
         }
     }

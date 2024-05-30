@@ -52,6 +52,8 @@ namespace Kyrs1
             this.addPhotoButton = new System.Windows.Forms.Button();
             this.saveChangesButton = new System.Windows.Forms.Button();
             this.template_2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel8 = new System.Windows.Forms.Panel();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -60,13 +62,14 @@ namespace Kyrs1
             this.richTextBox8 = new System.Windows.Forms.RichTextBox();
             this.panel12 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.template_3 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.richTextBox7 = new System.Windows.Forms.RichTextBox();
             this.panel15 = new System.Windows.Forms.Panel();
             this.richTextBox10 = new System.Windows.Forms.RichTextBox();
+            this.addPhoto3Button = new System.Windows.Forms.Button();
+            this.editTextButton = new System.Windows.Forms.Button();
+            this.addPhoto2Button = new System.Windows.Forms.Button();
             this.template_1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -75,13 +78,13 @@ namespace Kyrs1
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.template_2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.template_3.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel15.SuspendLayout();
@@ -93,7 +96,7 @@ namespace Kyrs1
             this.treeView1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView1.Location = new System.Drawing.Point(12, 12);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(250, 600);
+            this.treeView1.Size = new System.Drawing.Size(250, 653);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -184,6 +187,7 @@ namespace Kyrs1
             this.template_1.Controls.Add(this.panel4);
             this.template_1.Controls.Add(this.panel3);
             this.template_1.Controls.Add(this.panel2);
+            this.template_1.Enabled = false;
             this.template_1.Location = new System.Drawing.Point(1378, 12);
             this.template_1.Name = "template_1";
             this.template_1.Size = new System.Drawing.Size(950, 650);
@@ -278,17 +282,19 @@ namespace Kyrs1
             // 
             // addPhotoButton
             // 
-            this.addPhotoButton.Location = new System.Drawing.Point(1261, 256);
+            this.addPhotoButton.Enabled = false;
+            this.addPhotoButton.Location = new System.Drawing.Point(1261, 335);
             this.addPhotoButton.Name = "addPhotoButton";
             this.addPhotoButton.Size = new System.Drawing.Size(98, 23);
             this.addPhotoButton.TabIndex = 9;
             this.addPhotoButton.Text = "Додати фото";
             this.addPhotoButton.UseVisualStyleBackColor = true;
+            this.addPhotoButton.Visible = false;
             this.addPhotoButton.Click += new System.EventHandler(this.addPhotoButton_Click);
             // 
             // saveChangesButton
             // 
-            this.saveChangesButton.Location = new System.Drawing.Point(1261, 302);
+            this.saveChangesButton.Location = new System.Drawing.Point(1261, 260);
             this.saveChangesButton.Name = "saveChangesButton";
             this.saveChangesButton.Size = new System.Drawing.Size(98, 23);
             this.saveChangesButton.TabIndex = 10;
@@ -303,10 +309,29 @@ namespace Kyrs1
             this.template_2.Controls.Add(this.panel9);
             this.template_2.Controls.Add(this.panel11);
             this.template_2.Controls.Add(this.panel12);
+            this.template_2.Enabled = false;
             this.template_2.Location = new System.Drawing.Point(224, 684);
             this.template_2.Name = "template_2";
             this.template_2.Size = new System.Drawing.Size(950, 650);
             this.template_2.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox3);
+            this.panel1.Location = new System.Drawing.Point(529, 31);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(415, 250);
+            this.panel1.TabIndex = 9;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(415, 250);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
             // 
             // panel8
             // 
@@ -383,32 +408,16 @@ namespace Kyrs1
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pictureBox3);
-            this.panel1.Location = new System.Drawing.Point(529, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 250);
-            this.panel1.TabIndex = 9;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(415, 250);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            // 
             // template_3
             // 
             this.template_3.Controls.Add(this.panel13);
             this.template_3.Controls.Add(this.panel15);
+            this.template_3.Enabled = false;
             this.template_3.Location = new System.Drawing.Point(283, 15);
             this.template_3.Name = "template_3";
             this.template_3.Size = new System.Drawing.Size(950, 650);
             this.template_3.TabIndex = 12;
+            this.template_3.Visible = false;
             // 
             // panel13
             // 
@@ -448,12 +457,49 @@ namespace Kyrs1
             this.richTextBox10.TabIndex = 3;
             this.richTextBox10.Text = "";
             // 
+            // addPhoto3Button
+            // 
+            this.addPhoto3Button.Enabled = false;
+            this.addPhoto3Button.Location = new System.Drawing.Point(1261, 364);
+            this.addPhoto3Button.Name = "addPhoto3Button";
+            this.addPhoto3Button.Size = new System.Drawing.Size(98, 23);
+            this.addPhoto3Button.TabIndex = 14;
+            this.addPhoto3Button.Text = "Додати фото 2";
+            this.addPhoto3Button.UseVisualStyleBackColor = true;
+            this.addPhoto3Button.Visible = false;
+            this.addPhoto3Button.Click += new System.EventHandler(this.addPhoto3Button_Click);
+            // 
+            // editTextButton
+            // 
+            this.editTextButton.Location = new System.Drawing.Point(1261, 297);
+            this.editTextButton.Name = "editTextButton";
+            this.editTextButton.Size = new System.Drawing.Size(75, 23);
+            this.editTextButton.TabIndex = 4;
+            this.editTextButton.Text = "Редагувати";
+            this.editTextButton.UseVisualStyleBackColor = true;
+            this.editTextButton.Click += new System.EventHandler(this.editTextButton_Click);
+            // 
+            // addPhoto2Button
+            // 
+            this.addPhoto2Button.Enabled = false;
+            this.addPhoto2Button.Location = new System.Drawing.Point(1261, 335);
+            this.addPhoto2Button.Name = "addPhoto2Button";
+            this.addPhoto2Button.Size = new System.Drawing.Size(98, 23);
+            this.addPhoto2Button.TabIndex = 13;
+            this.addPhoto2Button.Text = "Додати фото";
+            this.addPhoto2Button.UseVisualStyleBackColor = true;
+            this.addPhoto2Button.Visible = false;
+            this.addPhoto2Button.Click += new System.EventHandler(this.addPhoto2Button_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(2484, 1901);
+            this.ClientSize = new System.Drawing.Size(1373, 973);
+            this.Controls.Add(this.addPhoto3Button);
+            this.Controls.Add(this.addPhoto2Button);
+            this.Controls.Add(this.editTextButton);
             this.Controls.Add(this.template_3);
             this.Controls.Add(this.template_2);
             this.Controls.Add(this.template_1);
@@ -476,13 +522,13 @@ namespace Kyrs1
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.template_2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.template_3.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel15.ResumeLayout(false);
@@ -529,6 +575,9 @@ namespace Kyrs1
         private RichTextBox richTextBox7;
         private Panel panel15;
         private RichTextBox richTextBox10;
+        private Button editTextButton;
+        private Button addPhoto2Button;
+        private Button addPhoto3Button;
     }
 }
 
