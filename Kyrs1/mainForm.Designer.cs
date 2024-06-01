@@ -496,7 +496,7 @@ namespace Kyrs1
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1373, 973);
+            this.ClientSize = new System.Drawing.Size(1924, 973);
             this.Controls.Add(this.addPhoto3Button);
             this.Controls.Add(this.addPhoto2Button);
             this.Controls.Add(this.editTextButton);
