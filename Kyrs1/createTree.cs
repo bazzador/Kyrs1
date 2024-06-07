@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Runtime.Remoting.Contexts;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Kyrs1
@@ -11,16 +12,17 @@ namespace Kyrs1
     {
         public event EventHandler<TreeEventArgs> TreeCreated;
         public List<template> templates;
-        public abstract class template
+
+        public abstract class template 
         {
             public string Name { get; set; }
             public string Info { get; set; }
 
-            public string AddressFile { get; set; } = @"C:\AllFiles\cnulabs\cnulabs\OOP\Курсач\saves";
-                protected template(string name, string info)
+            public string AddressFile { get; set; } = @"C:\Kyrs11";
+            protected template(RichTextBox rtbName, RichTextBox rtbInfo)
             {
-                Name = name;
-                Info = info;
+                Name = rtbName.Rtf;
+                Info = rtbInfo.Rtf;
             }
             protected template()
             {
@@ -29,6 +31,9 @@ namespace Kyrs1
             {
                 return Name;
             }
+
+            public abstract void SaveTextToRtf(string filePath);
+            public abstract void ParseRTF(string filePath, RichTextBox rtbName, RichTextBox rtbInfo, RichTextBox rtbExtraInfo, RichTextBox rtbAddress, PictureBox pbImage);
         }
         public class template_1 : template
         {
@@ -37,90 +42,172 @@ namespace Kyrs1
             public string Address { get; set; }
             public RichTextBox[] rtb;
 
-            public template_1(string name, Image image, string info, string extraInfo, string address, RichTextBox[] rtb): base(name, info)
+            public template_1(RichTextBox rtbName, RichTextBox rtbInfo, RichTextBox rtbExtraInfo, RichTextBox rtbAddress, Image image) : base(rtbName, rtbInfo)
             {
                 Image = image;
-                ExtraInfo = extraInfo;
-                Address = address;
-                this.rtb = rtb;
+                ExtraInfo = rtbExtraInfo.Rtf;
+                Address = rtbAddress.Rtf;
             }
 
             public template_1() : base()
             {
-                rtb = new RichTextBox[4];
-                rtb[0] = new RichTextBox();
-                rtb[1] = new RichTextBox();
-                rtb[2] = new RichTextBox();
-                rtb[3] = new RichTextBox();
             }
-            public void SaveTextToRtf(RichTextBox[] richTextBoxes, string directoryPath, string fileName)
+            public override void SaveTextToRtf(string filePath) 
             {
-                // Перевірка наявності директорії та створення, якщо вона не існує
-                if (!Directory.Exists(directoryPath))
+                try
                 {
-                    Directory.CreateDirectory(directoryPath);
-                }
+                    string imagePath = "NO PHOTO!";
+                    //if (!Directory.Exists(directoryPath))
+                    //{
+                    //    Directory.CreateDirectory(directoryPath);
+                    //}
 
-                // Формування повного шляху до файлу
-                string filePath = Path.Combine(directoryPath, fileName);
+                    //string filePath = Path.Combine(directoryPath, $"{Name}.txt");
 
-                using (RichTextBox combinedRichTextBox = new RichTextBox())
-                {
-                    foreach (var rtb in richTextBoxes)
+                    //using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+                    //using (StreamWriter writer = new StreamWriter(fileStream))
+                    //{
+                    //    writer.WriteLine("Name: " + Name);
+                    //    writer.WriteLine("Info (RTF): " + Info);
+                    //    writer.WriteLine("ExtraInfo (RTF): " + ExtraInfo);
+                    //    writer.WriteLine("Address: " + Address);
+
+                    //    // Збереження зображення в окремий файл
+                    //}
+                    if (Image != null)
                     {
-                        // Додаємо вміст кожного RichTextBox до комбінованого RichTextBox
-                        combinedRichTextBox.AppendText(rtb.Rtf);
-                        // Додаємо новий рядок між вмістом кожного RichTextBox (опціонально)
-                        combinedRichTextBox.AppendText("\n");
+                        imagePath = Path.Combine(Address, $"{Name}.png");
+                        Image.Save(imagePath);
                     }
+                    string formattedContent = $"Name: {Name}\n" +
+                                      $"Info (RTF): {Info}\n" +
+                                      $"ExtraInfo (RTF): {ExtraInfo}\n" +
+                                      $"Address: {Address}\n" +
+                                      $"ImagePath: {imagePath}\n";
 
-                    // Зберігаємо комбінований вміст у RTF файл
-                    File.WriteAllText(filePath, combinedRichTextBox.Rtf);
+                    File.WriteAllText(filePath, formattedContent);
+                    
+                    MessageBox.Show("Дані успішно збережено!", "Збереження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Сталася помилка при збереженні даних: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            public void LoadTextFromRtf(string filePath)
+            //public void LoadTextFromRtf(string filePath)
+            //{
+            //    string[] contents;
+            //    if (File.Exists(filePath))
+            //    {
+            //        using (RichTextBox combinedRichTextBox = new RichTextBox())
+            //        {
+            //            // Зчитуємо вміст файлу
+            //            combinedRichTextBox.LoadFile(filePath, RichTextBoxStreamType.RichText);
+
+            //            // Розділяємо вміст за роздільниками нових рядків
+            //            contents = combinedRichTextBox.Rtf.Split(new[] { "\n" }, StringSplitOptions.None);
+
+            //            // Завантажуємо вміст у кожен RichTextBox
+            //            for (int i = 0; i < rtb.Length && i < contents.Length; i++)
+            //            {
+            //                rtb[i].Rtf = contents[i];
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("Файл не знайдено за шляхом: " + filePath);
+            //    }
+            //}   
+            public override void ParseRTF(string filePath, RichTextBox rtbName, RichTextBox rtbInfo, RichTextBox rtbExtraInfo, RichTextBox rtbAddress, PictureBox pbImage) 
             {
-                string[] contents;
-                if (File.Exists(filePath))
+                // Зчитування файлу
+                if (!File.Exists(filePath))
                 {
-                    using (RichTextBox combinedRichTextBox = new RichTextBox())
+                    return;
+                }
+                string rtfContent = File.ReadAllText(filePath);
+
+                // Регулярні вирази для виділення потрібних секцій
+                string namePattern = @"Name:\s*({.*?})\s*Info";
+                string infoPattern = @"Info \(RTF\):\s*({.*?})\s*ExtraInfo";
+                string extraInfoPattern = @"ExtraInfo \(RTF\):\s*({.*?})\s*Address:(.*?)\n";
+                string addressPattern = @"Address:\s*({.*?})\s*ImagePath";
+                string imagePathPattern = @"ImagePath:\s*(.*)$";
+
+                // Виділення значень за допомогою регулярних виразів
+                var nameMatch = Regex.Match(rtfContent, namePattern, RegexOptions.Singleline);
+                var infoMatch = Regex.Match(rtfContent, infoPattern, RegexOptions.Singleline);
+                var extraInfoMatch = Regex.Match(rtfContent, extraInfoPattern, RegexOptions.Singleline);
+                var addressMatch = Regex.Match(rtfContent, addressPattern, RegexOptions.Singleline);
+                var imagePathMatch = Regex.Match(rtfContent, imagePathPattern, RegexOptions.Singleline);
+
+                // Встановлення значень у відповідні RichTextBox
+                if (nameMatch.Success)
+                {
+                    rtbName.Rtf = nameMatch.Groups[1].Value.Trim();
+                }
+                if (infoMatch.Success)
+                {
+                    rtbInfo.Rtf = infoMatch.Groups[1].Value.Trim();
+                }
+                if (extraInfoMatch.Success)
+                {
+                    rtbExtraInfo.Rtf = extraInfoMatch.Groups[1].Value.Trim();
+                }
+                if (addressMatch.Success)
+                {
+                    rtbAddress.Rtf = addressMatch.Groups[1].Value.Trim();
+                }
+                if (imagePathMatch.Success)
+                {
+                    string imagePath = imagePathMatch.Groups[1].Value.Trim();
+                    if (imagePath != "NO PHOTO!")
                     {
-                        // Зчитуємо вміст файлу
-                        combinedRichTextBox.LoadFile(filePath, RichTextBoxStreamType.RichText);
-
-                        // Розділяємо вміст за роздільниками нових рядків
-                        contents = combinedRichTextBox.Rtf.Split(new[] { "\n" }, StringSplitOptions.None);
-
-                        // Завантажуємо вміст у кожен RichTextBox
-                        for (int i = 0; i < rtb.Length && i < contents.Length; i++)
+                        if (File.Exists(imagePath))
                         {
-                            rtb[i].Rtf = contents[i];
+                            pbImage.Image = Image.FromFile(imagePath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Зображення не знайдено за вказаним шляхом.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
+                    else
+                    {
+                        pbImage.Image = null;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Файл не знайдено за шляхом: " + filePath);
-                }
-            }   
+            }
         }
         public class template_2 : template
         {
             public Image Image1 { get; set; }
             public Image Image2 { get; set; }
-            public string Adress { get; set; }
+            public string Address { get; set; }
 
-            //public string AdressFile = @"C:\AllFiles\cnulabs\cnulabs\OOP\Курсач\saves";
-            public template_2(string name, Image image1, Image image2, string info, string adress) : base(name, info)
+            public template_2(RichTextBox rtbName, RichTextBox rtbInfo, RichTextBox rtbAddress, Image image1, Image image2) : base(rtbName, rtbInfo)
             {
                 Image1 = image1;
                 Image2 = image2;
-                Adress = adress;
+                Address = rtbAddress.Rtf;
             }
+
             public template_2() : base()
             {
             }
+
+            public override void SaveTextToRtf(string filePath)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void ParseRTF(string filePath, RichTextBox rtbName, RichTextBox rtbInfo, RichTextBox rtbAddress, PictureBox pbImage, PictureBox pbImage2)
+            {
+                // ваша реалізація методу для template_2 з унікальною сигнатурою
+            }
         }
+
         public class template_3 : template
         {
         }
@@ -128,7 +215,6 @@ namespace Kyrs1
         {
             InitializeComponent();
             templates = new List<template>();
-
         }
 
         public class Tree

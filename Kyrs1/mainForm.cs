@@ -10,8 +10,8 @@ namespace Kyrs1
     public partial class mainForm : Form
     {
         public List<template> templates;
-        public string AddressFile { get; set; } = @"C:\AllFiles\cnulabs\cnulabs\OOP\Курсач\saves";
-
+        public string AddressFile { get; set; } = @"C:\Kyrs11";
+        public TreeNode selectedNode;
         public mainForm()
         {
             InitializeComponent();
@@ -84,10 +84,10 @@ namespace Kyrs1
             richTextBox2.SelectionFont = new Font(richTextBox2.SelectionFont.FontFamily, newSize, richTextBox2.SelectionFont.Style);
             richTextBox3.SelectionFont = new Font(richTextBox3.SelectionFont.FontFamily, newSize, richTextBox3.SelectionFont.Style);
             richTextBox4.SelectionFont = new Font(richTextBox4.SelectionFont.FontFamily, newSize, richTextBox4.SelectionFont.Style);
-            richTextBox5.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, newSize, richTextBox1.SelectionFont.Style);
-            richTextBox6.SelectionFont = new Font(richTextBox2.SelectionFont.FontFamily, newSize, richTextBox2.SelectionFont.Style);
-            richTextBox7.SelectionFont = new Font(richTextBox3.SelectionFont.FontFamily, newSize, richTextBox3.SelectionFont.Style);
-            richTextBox8.SelectionFont = new Font(richTextBox4.SelectionFont.FontFamily, newSize, richTextBox4.SelectionFont.Style);
+            richTextBox5.SelectionFont = new Font(richTextBox5.SelectionFont.FontFamily, newSize, richTextBox5.SelectionFont.Style);
+            richTextBox6.SelectionFont = new Font(richTextBox6.SelectionFont.FontFamily, newSize, richTextBox6.SelectionFont.Style);
+            richTextBox7.SelectionFont = new Font(richTextBox7.SelectionFont.FontFamily, newSize, richTextBox7.SelectionFont.Style);
+            richTextBox8.SelectionFont = new Font(richTextBox8.SelectionFont.FontFamily, newSize, richTextBox8.SelectionFont.Style);
 
         }
 
@@ -106,9 +106,9 @@ namespace Kyrs1
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = e.Node;
+            selectedNode = e.Node;
             MessageBox.Show("Вибрано гілку: " + selectedNode.Text);
-            string path = Path.Combine(AddressFile, $"{selectedNode.Text}.rtf");
+            string path = Path.Combine(AddressFile, $"{selectedNode.Text}.txt");
             template_1.Visible = false;
             template_2.Visible = false;
             template_3.Visible = false;
@@ -120,12 +120,19 @@ namespace Kyrs1
                     template_1.Location = new Point(283, 15);
                     addPhotoButton.Visible = true;
                     template_1 template1 = (template_1)templates[selectedNode.Index];
-                    template1.LoadTextFromRtf(path);
+                    //template1.LoadTextFromRtf(path);
+                    // Створення RichTextBox-ів
+                    RichTextBox rtbName = new RichTextBox();
+                    RichTextBox rtbInfo = new RichTextBox();
+                    RichTextBox rtbExtraInfo = new RichTextBox();
+                    RichTextBox rtbAddress = new RichTextBox();
+                    PictureBox pbImage = new PictureBox();
 
-                    richTextBox4.Rtf = template1.rtb[0].Rtf;
-                    richTextBox2.Rtf = template1.rtb[1].Rtf;
-                    richTextBox1.Rtf = template1.rtb[2].Rtf;
-                    richTextBox3.Rtf = template1.rtb[3].Rtf;
+                    template1.ParseRTF(path, rtbName, rtbInfo, rtbExtraInfo, rtbAddress, pbImage);
+                    richTextBox4.Rtf = rtbName.Rtf;
+                    richTextBox2.Rtf = rtbInfo.Rtf;
+                    richTextBox1.Rtf = rtbExtraInfo.Rtf;
+                    richTextBox3.Rtf = rtbAddress.Rtf;
 
                     break;
                 case "template_2":
@@ -170,7 +177,7 @@ namespace Kyrs1
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.InitialDirectory = @"c:\";
                 openFileDialog.Filter = "Image Files|*.bmp;*.jpg;*.jpeg;*.png;*.gif";
                 openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;
@@ -188,48 +195,16 @@ namespace Kyrs1
 
         private void saveChangesButton_Click(object sender, EventArgs e)
         {
-            // Створення екземпляра template_1 з форматованим текстом у форматі RTF
-            RichTextBox[] rtb = new RichTextBox[] { richTextBox4, richTextBox2, richTextBox1, richTextBox3};
-            template_1 template1 = new template_1(richTextBox4.Text, pictureBox1.Image, richTextBox1.Rtf, richTextBox2.Rtf, richTextBox3.Rtf, rtb);
-            template1.SaveTextToRtf(rtb, template1.AddressFile, Name);
-
-            // Збереження даних у текстовий файл
-            try
+            switch (templates[selectedNode.Index].GetType().Name)
             {
-                string userDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string directoryPath = Path.Combine(userDocumentsPath, "MyApp", "saves");
+                case "template_1":
+                        template_1 template1 = new template_1(richTextBox4, richTextBox1, richTextBox2, richTextBox3, pictureBox1.Image);
+                        template1.SaveTextToRtf(Path.Combine(AddressFile, $"{selectedNode.Text}.txt"));
+                        MessageBox.Show($"Файл {selectedNode.Text} успішно збережений!");
+                    break;
+                //case "template_2":
 
-                // Перевірка наявності директорії та її створення, якщо вона не існує
-                if (!Directory.Exists(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
-
-                string filePath = Path.Combine(directoryPath, "data.txt");
-
-                // Використання FileStream для читання та запису
-                using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
-                using (StreamWriter writer = new StreamWriter(fileStream))
-                {
-                    writer.WriteLine("Name: " + template1.Name);
-                    writer.WriteLine("Info (RTF): " + template1.Info);
-                    writer.WriteLine("ExtraInfo (RTF): " + template1.ExtraInfo);
-                    writer.WriteLine("Address: " + template1.Address);
-
-                    // Збереження зображення в окремий файл
-                    if (template1.Image != null)
-                    {
-                        string imagePath = Path.Combine(directoryPath, "image.png");
-                        template1.Image.Save(imagePath);
-                        writer.WriteLine("ImagePath: " + imagePath);
-                    }
-                }
-
-                MessageBox.Show("Дані успішно збережено!", "Збереження", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Сталася помилка при збереженні даних: " + ex.Message, "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  
             }
         }
 

@@ -208,7 +208,7 @@ namespace Kyrs1
             this.richTextBox4.Name = "richTextBox4";
             this.richTextBox4.Size = new System.Drawing.Size(950, 28);
             this.richTextBox4.TabIndex = 0;
-            this.richTextBox4.Text = "";
+            this.richTextBox4.Text = "і";
             // 
             // panel5
             // 
