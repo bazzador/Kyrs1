@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
 using static Kyrs1.createTree;
 
@@ -12,6 +13,7 @@ namespace Kyrs1
         public List<template> templates;
         public string AddressFile { get; set; } = @"C:\Kyrs11";
         public TreeNode selectedNode;
+        public string path;
         public mainForm()
         {
             InitializeComponent();
@@ -26,17 +28,31 @@ namespace Kyrs1
         private void CreateTreeForm_TreeCreated(object sender, createTree.TreeEventArgs e)
         {
             TreeNode rootNode = new TreeNode(e.Tree.Name);
+
             foreach (template _template in e.Templates)
             {
-                templates.Add(_template);
+                TreeNode branchNode = new TreeNode(_template.Name); // Припустимо, що у шаблону є властивість Name
+                branchNode.Tag = _template; // Збереження шаблону у властивості Tag
+                rootNode.Nodes.Add(branchNode);
             }
-            foreach (string node in e.Tree.Branches)
-            {
-                rootNode.Nodes.Add(new TreeNode(node));
-            }
+
             treeView1.Nodes.Add(rootNode);
             treeView1.ExpandAll();
         }
+        //private void CreateTreeForm_TreeCreated(object sender, createTree.TreeEventArgs e)
+        //{
+        //    TreeNode rootNode = new TreeNode(e.Tree.Name);
+        //    foreach (template _template in e.Templates)
+        //    {
+        //        templates.Add(_template);
+        //    }
+        //    foreach (string node in e.Tree.Branches)
+        //    {
+        //        rootNode.Nodes.Add(new TreeNode(node));
+        //    }
+        //    treeView1.Nodes.Add(rootNode);
+        //    treeView1.ExpandAll();
+        //}
 
         private void boldButton_Click(object sender, EventArgs e)
         {
@@ -108,7 +124,7 @@ namespace Kyrs1
         {
             selectedNode = e.Node;
             MessageBox.Show("Вибрано гілку: " + selectedNode.Text);
-            string path = Path.Combine(AddressFile, $"{selectedNode.Text}.txt");
+            path = Path.Combine(AddressFile, selectedNode.Text);
             template_1.Visible = false;
             template_2.Visible = false;
             template_3.Visible = false;
@@ -120,19 +136,18 @@ namespace Kyrs1
                     template_1.Location = new Point(283, 15);
                     addPhotoButton.Visible = true;
                     template_1 template1 = (template_1)templates[selectedNode.Index];
-                    //template1.LoadTextFromRtf(path);
-                    // Створення RichTextBox-ів
-                    RichTextBox rtbName = new RichTextBox();
-                    RichTextBox rtbInfo = new RichTextBox();
-                    RichTextBox rtbExtraInfo = new RichTextBox();
-                    RichTextBox rtbAddress = new RichTextBox();
-                    PictureBox pbImage = new PictureBox();
+                    RichTextBox rtbName1 = new RichTextBox();
+                    RichTextBox rtbInfo1 = new RichTextBox();
+                    RichTextBox rtbExtraInfo1 = new RichTextBox();
+                    RichTextBox rtbAddress1 = new RichTextBox();
+                    PictureBox pbImage1_1 = new PictureBox();
 
-                    template1.ParseRTF(path, rtbName, rtbInfo, rtbExtraInfo, rtbAddress, pbImage);
-                    richTextBox4.Rtf = rtbName.Rtf;
-                    richTextBox2.Rtf = rtbInfo.Rtf;
-                    richTextBox1.Rtf = rtbExtraInfo.Rtf;
-                    richTextBox3.Rtf = rtbAddress.Rtf;
+                    template1.ParseRTF(path, rtbName1, rtbInfo1, rtbExtraInfo1, rtbAddress1, pbImage1_1);
+                    richTextBox4.Rtf = rtbName1.Rtf;
+                    richTextBox2.Rtf = rtbInfo1.Rtf;
+                    richTextBox1.Rtf = rtbExtraInfo1.Rtf;
+                    richTextBox3.Rtf = rtbAddress1.Rtf;
+                    pictureBox1.Image = pbImage1_1.Image;
 
                     break;
                 case "template_2":
@@ -140,10 +155,28 @@ namespace Kyrs1
                     template_2.Location = new Point(283, 15);
                     addPhoto2Button.Visible = true;
                     addPhoto3Button.Visible = true;
+                    template_2 template2 = (template_2)templates[selectedNode.Index];
+                    RichTextBox rtbName2 = new RichTextBox();
+                    RichTextBox rtbInfo2 = new RichTextBox();
+                    RichTextBox rtbAddress2 = new RichTextBox();
+                    PictureBox pbImage2_1 = new PictureBox();
+                    PictureBox pbImage2_2 = new PictureBox();
+                    template2.ParseRTF(path, rtbName2, rtbInfo2, rtbAddress2, pbImage2_1, pbImage2_2);
+                    richTextBox5.Rtf = rtbName2.Rtf;
+                    richTextBox8.Rtf = rtbInfo2.Rtf;
+                    richTextBox6.Rtf = rtbAddress2.Rtf;
+                    pictureBox2.Image = pbImage2_1.Image;
+                    pictureBox3.Image = pbImage2_2.Image;
                     break;
                 case "template_3":
                     template_3.Visible= true;
                     template_3.Location = new Point(283, 15);
+                    template_3 template3 = (template_3)templates[selectedNode.Index];
+                    RichTextBox rtbName3 = new RichTextBox();
+                    RichTextBox rtbInfo3 = new RichTextBox();
+                    template3.ParseRTF(path, rtbName3, rtbInfo3);
+                    richTextBox7.Rtf = rtbName3.Rtf;
+                    richTextBox10.Rtf = rtbInfo3.Rtf;
                     break;
             }
         }
@@ -195,16 +228,24 @@ namespace Kyrs1
 
         private void saveChangesButton_Click(object sender, EventArgs e)
         {
+            string name = selectedNode.Text;
             switch (templates[selectedNode.Index].GetType().Name)
             {
                 case "template_1":
-                        template_1 template1 = new template_1(richTextBox4, richTextBox1, richTextBox2, richTextBox3, pictureBox1.Image);
-                        template1.SaveTextToRtf(Path.Combine(AddressFile, $"{selectedNode.Text}.txt"));
+                        template_1 template1 = new template_1(name, richTextBox4, richTextBox1, richTextBox2, richTextBox3, pictureBox1.Image);
+                        template1.SaveTextToRtf(Path.Combine(AddressFile, selectedNode.Text));
                         MessageBox.Show($"Файл {selectedNode.Text} успішно збережений!");
                     break;
-                //case "template_2":
-
-                  
+                case "template_2":
+                    template_2 template2 = new template_2(name, richTextBox5, richTextBox8, richTextBox6, pictureBox2.Image, pictureBox3.Image);
+                    template2.SaveTextToRtf(Path.Combine(AddressFile, selectedNode.Text));
+                    MessageBox.Show($"Файл {selectedNode.Text} успішно збережений!");
+                    break;
+                case "template_3":
+                    template_3 template3 = new template_3(name, richTextBox7, richTextBox10);
+                    template3.SaveTextToRtf(Path.Combine(AddressFile, selectedNode.Text));
+                    MessageBox.Show($"Файл {selectedNode.Text} успішно збережений!");
+                    break;
             }
         }
 

@@ -451,7 +451,7 @@ namespace Kyrs1
             this.richTextBox10.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.richTextBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox10.Location = new System.Drawing.Point(-4, -1);
+            this.richTextBox10.Location = new System.Drawing.Point(-1, -1);
             this.richTextBox10.Name = "richTextBox10";
             this.richTextBox10.Size = new System.Drawing.Size(942, 425);
             this.richTextBox10.TabIndex = 3;
@@ -496,7 +496,7 @@ namespace Kyrs1
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
-            this.ClientSize = new System.Drawing.Size(1924, 973);
+            this.ClientSize = new System.Drawing.Size(1924, 1061);
             this.Controls.Add(this.addPhoto3Button);
             this.Controls.Add(this.addPhoto2Button);
             this.Controls.Add(this.editTextButton);
